@@ -1,0 +1,53 @@
+{
+  "name": "stockfront-end",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite --port=3000",
+    "build": "vite build",
+    "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^7.2.0",
+    "@fortawesome/free-solid-svg-icons": "^7.2.0",
+    "@fortawesome/react-fontawesome": "^3.3.1",
+    "@heroicons/react": "^2.0.18",
+    "@hookform/devtools": "^4.3.1",
+    "@hookform/resolvers": "^3.3.2",
+    "@material-tailwind/react": "^2.1.9",
+    "@nivo/bar": "^0.85.1",
+    "@nivo/radial-bar": "^0.85.1",
+    "@radix-ui/react-label": "^2.0.2",
+    "@radix-ui/react-slot": "^1.0.2",
+    "axios": "^1.18.0",
+    "class-variance-authority": "^0.7.0",
+    "clsx": "^2.0.0",
+    "lodash": "^4.17.21",
+    "lucide-react": "^0.292.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-hook-form": "^7.48.2",
+    "react-query": "^3.39.3",
+    "react-router-dom": "^6.22.3",
+    "tailwind-merge": "^2.1.0",
+    "tailwindcss-animate": "^1.0.7",
+    "tw-elements": "^1.1.0",
+    "zod": "^3.22.4"
+  },
+  "devDependencies": {
+    "@types/node": "^20.10.3",
+    "@types/react": "^18.2.15",
+    "@types/react-dom": "^18.2.7",
+    "@vitejs/plugin-react-swc": "^3.3.2",
+    "autoprefixer": "^10.4.16",
+    "eslint": "^8.45.0",
+    "eslint-plugin-react": "^7.32.2",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "eslint-plugin-react-refresh": "^0.4.3",
+    "postcss": "^8.4.31",
+    "tailwindcss": "^3.3.5",
+    "vite": "^4.5.0"
+  }
+}
