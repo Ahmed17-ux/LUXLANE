@@ -1,218 +1,304 @@
-# E-commerce / Stock Management Platform
 
-A full-stack e-commerce & stock management application.
+# 🛍️ LUXLANE – E-Commerce & Stock Management Platform
 
-- **Backend:** Laravel 10 REST API (PHP 8.1+, MySQL, Sanctum token auth)
-- **Frontend:** React 18 + Vite (single-page app in `StockFront_End/`)
+A full-stack e-commerce and stock management web application developed as a Final Year Project (PFE).
 
-The app has three role-based areas, each with its own login and abilities:
+LUXLANE provides an online shopping experience and an administration system for managing products, categories, users, and orders.
 
-| Role   | What they can do                                                        | Default login                          |
-|--------|-------------------------------------------------------------------------|----------------------------------------|
-| User   | Browse the shop, place orders, comment on products, manage own profile  | `houssamhd@gmail.com` / `houssamhd@gmail.com` |
-| Editor | Manage products, categories, videos                                     | `editorhd@gmail.com` / `editorhd@@`    |
-| Admin  | Everything an editor can do + manage editors, users, reports, orders    | `adminhd@gmail.com` / `adminhd@@`      |
+## 🚀 Technologies Used
 
-> These accounts are created by the database seeder (see below).
+### Backend
+- PHP 8.3
+- Laravel 10
+- RESTful API
+- Laravel Sanctum
+- Composer
 
----
+### Frontend
+- React 18
+- Vite
+- JavaScript
+- Axios
+- React Router
+- Tailwind CSS
+- Material Tailwind
 
-## 1. Prerequisites
+### Database
+- MySQL
 
-Make sure the following are installed:
+### Development Tools
+- Visual Studio Code
+- Git & GitHub
+- XAMPP
+- npm
 
-- **PHP** >= 8.1 (with extensions: `pdo_mysql`, `mbstring`, `openssl`, `fileinfo`, `ctype`, `json`, `bcmath`, `tokenizer`, `xml`)
-- **Composer** (latest)
-- **Node.js** >= 18 and **npm**
-- **MySQL** >= 5.7 / MariaDB (or any DB supported by Laravel)
+## ✨ Main Features
 
----
+### 👤 User Interface
+- User registration and authentication
+- Browse products and categories
+- View product details
+- Shopping cart management
+- Place orders
+- Manage personal profile
+- Comment on products
 
-## 2. Backend setup (Laravel API)
+### 📝 Editor Dashboard
+- Manage products
+- Manage categories
+- Manage videos
+- Manage customer orders
 
-Run these from the **project root** (`E-commerce/`).
+### 🛠️ Admin Dashboard
+- Dashboard statistics
+- Manage products and categories
+- Manage users and editors
+- Manage customer orders
+- Access reports
 
-### 2.1 Install PHP dependencies
+## 🏗️ Project Architecture
+
+LUXLANE follows a separated frontend and backend architecture:
+
+- **Frontend:** React.js single-page application
+- **Backend:** Laravel REST API
+- **Database:** MySQL
+- **Authentication:** Laravel Sanctum token-based authentication
+
+The frontend communicates with the backend through RESTful API endpoints.
+
+## 📋 Prerequisites
+
+Make sure you have installed:
+
+- PHP >= 8.1
+- Composer
+- Node.js >= 18
+- npm
+- MySQL >= 5.7
+- XAMPP (optional, for local development)
+
+## ⚙️ Installation & Setup
+
+### 1. Clone the Repository
+
+```bash
+git clone https://github.com/Ahmed17-ux/LUXLANE.git
+cd LUXLANE
+```
+
+### 2. Backend Setup – Laravel
+
+Install PHP dependencies:
+
 ```bash
 composer install
 ```
 
-### 2.2 Create the environment file
+Create the environment file:
+
 ```bash
-# copy the template
-cp .env.example .env      # Windows PowerShell: Copy-Item .env.example .env
+cp .env.example .env
 ```
 
-### 2.3 Generate the application key
+Generate the application key:
+
 ```bash
 php artisan key:generate
 ```
 
-### 2.4 Configure the database
-Create a MySQL database (default name is `laravel`), then edit `.env`:
+### 3. Database Configuration
+
+Create a MySQL database named:
+
+```text
+ecommerce
+```
+
+Configure your `.env` file:
+
 ```env
 DB_CONNECTION=mysql
 DB_HOST=127.0.0.1
 DB_PORT=3306
-DB_DATABASE=laravel
+DB_DATABASE=ecommerce
 DB_USERNAME=root
 DB_PASSWORD=
 ```
 
-### 2.5 Run migrations + seed the database
-This creates all tables **and** the default Admin / Editor / User accounts plus 50 sample users.
-```bash
-php artisan migrate --seed
-```
-> Already migrated? Re-seed only with `php artisan db:seed`.
-> Start completely fresh with `php artisan migrate:fresh --seed`.
+Update the database credentials according to your local environment.
 
-### 2.6 Link the storage folder (required for images)
-Uploaded product / profile images are served from `/storage`, so this symlink is mandatory:
+### 4. Run Migrations
+
+```bash
+php artisan migrate
+```
+
+If your project contains configured seeders, you can also run:
+
+```bash
+php artisan db:seed
+```
+
+### 5. Storage Configuration
+
+Create the symbolic link for uploaded files:
+
 ```bash
 php artisan storage:link
 ```
 
-### 2.7 Start the API server
+### 6. Start the Laravel Backend
+
 ```bash
 php artisan serve
 ```
-The API now runs at **http://localhost:8000** (the frontend expects exactly this URL — see note below).
 
----
+The backend API will be available at:
 
-## 3. Frontend setup (React + Vite)
+```text
+http://127.0.0.1:8000
+```
 
-Open a **second terminal** and run from the `StockFront_End/` folder:
+### 7. Frontend Setup – React
+
+Open a second terminal:
 
 ```bash
 cd StockFront_End
+```
+
+Install dependencies:
+
+```bash
 npm install
+```
+
+Start the development server:
+
+```bash
 npm run dev
 ```
-The frontend runs at **http://localhost:3000**.
 
-> **Important – API URL:** the frontend talks to the backend at a hard-coded URL
-> `http://localhost:8000/api`, defined in [`StockFront_End/src/api/IndexApi.jsx`](StockFront_End/src/api/IndexApi.jsx).
-> Image URLs (`http://localhost:8000/storage/...`) are also hard-coded across the
-> components. If you run the backend on a different host/port, update these references.
+The frontend will run at the local URL displayed by Vite in your terminal.
 
-### Build for production
-```bash
-npm run build      # outputs to StockFront_End/dist
-npm run preview    # preview the production build
+## 🔗 API Configuration
+
+The frontend communicates with the Laravel backend through the API configuration file:
+
+```text
+StockFront_End/src/api/IndexApi.jsx
 ```
 
----
+Make sure the API base URL matches your backend server:
 
-## 4. Quick start (TL;DR)
-
-```bash
-# --- Backend (terminal 1) ---
-composer install
-cp .env.example .env
-php artisan key:generate
-# create the MySQL database, then edit DB_* in .env
-php artisan migrate --seed
-php artisan storage:link
-php artisan serve            # -> http://localhost:8000
-
-# --- Frontend (terminal 2) ---
-cd StockFront_End
-npm install
-npm run dev                  # -> http://localhost:3000
+```javascript
+http://127.0.0.1:8000/api
 ```
 
-Then open **http://localhost:3000** and log in with one of the default accounts above.
+## 📁 Project Structure
 
----
-
-## 5. Seeded data & default accounts
-
-The seeder [`database/seeders/DatabaseSeeder.php`](database/seeders/DatabaseSeeder.php) creates:
-
-| Type   | Name           | Email                  | Password                |
-|--------|----------------|------------------------|-------------------------|
-| User   | user_houssam   | `houssamhd@gmail.com`  | `houssamhd@gmail.com`   |
-| Admin  | admin ladmin   | `adminhd@gmail.com`    | `adminhd@@`             |
-| Editor | editor leditor | `editorhd@gmail.com`   | `editorhd@@`            |
-
-Plus **50 randomly generated users** (via factory) for testing lists/pagination.
-
-> Products, categories, orders, etc. are **not** seeded — create them through the
-> Admin/Editor UI after logging in.
-
----
-
-## 6. Project structure
-
-```
-E-commerce/
-├── app/                  # Laravel application code (Models, Http/Controllers, ...)
+```text
+LUXLANE/
+│
+├── app/
+│   ├── Models/
+│   └── Http/
+│       └── Controllers/
+│
 ├── bootstrap/
 ├── config/
 ├── database/
-│   ├── factories/        # User, Admin, Editor factories
-│   ├── migrations/       # All table schemas
-│   └── seeders/          # DatabaseSeeder (default accounts + sample users)
-├── public/               # Laravel public web root (index.php)
+│   ├── factories/
+│   ├── migrations/
+│   └── seeders/
+│
+├── public/
+├── resources/
 ├── routes/
-│   ├── api.php           # REST API (user / editor / admin prefixes, Sanctum abilities)
-│   ├── web.php
-│   └── auth.php
-├── storage/              # Logs, cache, uploaded files (linked to public/storage)
+│   ├── api.php
+│   └── web.php
+│
+├── storage/
 ├── tests/
-├── .env.example          # Environment template
-├── composer.json
-└── StockFront_End/       # React + Vite frontend (separate npm project)
-    ├── src/
-    │   ├── api/          # IndexApi.jsx -> axios baseURL = http://localhost:8000/api
-    │   ├── Admin_things/ # Admin dashboard UI
-    │   ├── Editor_things/ # Editor dashboard UI
-    │   ├── User_things/  # Shop, cart, checkout, profile
-    │   ├── pages/ components/ layout/ routes/ service/ Contextapi/
-    └── package.json
+│
+├── StockFront_End/
+│   ├── src/
+│   │   ├── api/
+│   │   ├── Admin_things/
+│   │   ├── Editor_things/
+│   │   ├── User_things/
+│   │   ├── components/
+│   │   ├── pages/
+│   │   └── routes/
+│   │
+│   └── package.json
+│
+├── .env.example
+├── .gitignore
+└── composer.json
 ```
 
-### Main data entities
-`User`, `Admin`, `Editor`, `Role`, `Product`, `Category`, `Order`, `Transaction`,
-`Supplier`, `Comment`, `Report`, `Message`, `Video`.
+## 🗄️ Main Database Entities
 
-### Tech stack
-- Laravel 10, Laravel Sanctum (token auth with abilities), Laravel Breeze/UI, Inertia, Ziggy
-- React 18, React Router, React Query, React Hook Form + Zod, Axios
-- Tailwind CSS, Material Tailwind, Radix UI, Nivo charts, Lucide / Heroicons
+- Users
+- Admins
+- Editors
+- Products
+- Categories
+- Orders
+- Suppliers
+- Transactions
+- Comments
+- Reports
+- Messages
+- Videos
+
+## 🔐 Authentication & Authorization
+
+The application uses Laravel Sanctum for API authentication.
+
+Role-based access control separates permissions for:
+
+- Users
+- Editors
+- Administrators
+
+Authenticated requests use Bearer tokens to access protected API endpoints.
+
+## 🧰 Useful Commands
+
+| Task | Command |
+|---|---|
+| Install backend dependencies | `composer install` |
+| Install frontend dependencies | `npm install` |
+| Run migrations | `php artisan migrate` |
+| Clear Laravel caches | `php artisan optimize:clear` |
+| Start Laravel server | `php artisan serve` |
+| Start React server | `npm run dev` |
+| Build frontend | `npm run build` |
+
+## 🎯 Project Objectives
+
+The main objective of LUXLANE is to develop a complete e-commerce platform that simplifies online shopping and provides efficient management tools for products, customers, and orders.
+
+The project demonstrates practical skills in full-stack web development, REST API integration, database management, authentication, and responsive user interface development.
+
+## 👨‍💻 Developer
+
+**Ahmed Legti**
+
+Technician Specialized in Computer Science – Software Development (TSDI)
+
+**Institution:** Institut Prosec – Beni Mellal, Morocco
+
+**Academic Year:** 2025–2026
+
+## 📌 Project Information
+
+- **Project Name:** LUXLANE
+- **Project Type:** Final Year Project (PFE)
+- **Category:** E-Commerce Web Application
+- **Repository:** [GitHub – LUXLANE](https://github.com/Ahmed17-ux/LUXLANE)
 
 ---
-
-## 7. Authentication notes
-
-The API uses **Laravel Sanctum** with token *abilities* to separate the three areas:
-- `/api/user/*`   → requires ability `user`
-- `/api/editor/*` → requires ability `editor`
-- `/api/admin/*`  → requires ability `admin`
-
-Tokens are issued at login and sent by the frontend as a Bearer token on each request.
-
----
-
-## 8. Common commands
-
-| Task                          | Command                              |
-|-------------------------------|--------------------------------------|
-| Rebuild DB + reseed           | `php artisan migrate:fresh --seed`   |
-| Re-run seeders only           | `php artisan db:seed`                |
-| Clear caches                  | `php artisan optimize:clear`         |
-| Run backend tests             | `php artisan test`                   |
-| Re-create storage symlink     | `php artisan storage:link`           |
-| Lint frontend                 | `cd StockFront_End && npm run lint`  |
-
----
-
-## 9. Troubleshooting
-
-- **Images don't load / 404 on `/storage/...`** → run `php artisan storage:link` and make sure the backend is on port 8000.
-- **CORS / network errors in the browser** → confirm the API is running at `http://localhost:8000` and check `config/cors.php`.
-- **`No application encryption key`** → run `php artisan key:generate`.
-- **Frontend can't reach the API on a different port** → edit the base URL in `StockFront_End/src/api/IndexApi.jsx` (and the hard-coded `localhost:8000/storage` image URLs).
-- **`vendor/` or `node_modules/` missing** → they are not included in the distribution; run `composer install` and `npm install` to restore them.
